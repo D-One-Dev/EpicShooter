@@ -5,6 +5,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Transform footPoint;
+    [SerializeField] private float jumpColliderRadius;
+    [SerializeField] private LayerMask groundMask;
 
     private PlayerInput _playerInput;
     private void Awake()
@@ -27,13 +30,27 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.velocity = new Vector2(movement * movementSpeed, _rb.velocity.y);
 
-        if (movement < 0f) transform.localEulerAngles = new Vector3(0f, 180f, 0f);
-        else if (movement > 0f) transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (transform.position.x > mouseWorldPos.x) transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+        else if (transform.position.x < mouseWorldPos.x) transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        //if (movement < 0f) transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+        //else if (movement > 0f) transform.localEulerAngles = new Vector3(0f, 0f, 0f);
     }
 
     private void Jump()
     {
-        _rb.velocity = new Vector2(_rb.velocity.x, 0f);
-        _rb.AddForce(Vector2.up * jumpForce);
+        RaycastHit2D hit = Physics2D.CircleCast(footPoint.position, jumpColliderRadius, -Vector2.up, jumpColliderRadius, groundMask);
+        if(hit.collider != null)
+        {
+            _rb.velocity = new Vector2(_rb.velocity.x, 0f);
+            _rb.AddForce(Vector2.up * jumpForce);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(footPoint.position, jumpColliderRadius);
     }
 }
