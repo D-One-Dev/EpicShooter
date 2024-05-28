@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpColliderRadius;
     [SerializeField] private LayerMask groundMask;
 
+    [SerializeField] private Animator _animator; 
+
     private PlayerInput _playerInput;
     private void Awake()
     {
@@ -36,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
 
         //if (movement < 0f) transform.localEulerAngles = new Vector3(0f, 180f, 0f);
         //else if (movement > 0f) transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        _animator.SetFloat("XSpeed", Mathf.Abs(_rb.velocity.x));
+        _animator.SetFloat("YSpeed", Mathf.Abs(_rb.velocity.y));
     }
 
     private void Jump()
