@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -35,6 +36,8 @@ public class PlayerHealth : MonoBehaviour
             if(currentHealth <= 0)
             {
                 //Death
+                PlayerPrefs.SetInt("Score", ScoreController.instance.score);
+                SceneManager.LoadScene("Death Scene");
             }
         }
         UpdateUI();
