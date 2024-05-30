@@ -10,6 +10,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private int ammoAmount = 30;
     [SerializeField] private TMP_Text ammoText;
     [SerializeField] private float reloadTime = 1f;
+    [SerializeField] private AudioClip shootSound;
     private int currentAmmo;
     private bool isReloading;
     private void Start()
@@ -45,6 +46,8 @@ public class PlayerShoot : MonoBehaviour
 
             currentAmmo--;
             UpdateAmmoUI();
+
+            SoundController.instance.PlaySound(shootSound);
         }
     }
 

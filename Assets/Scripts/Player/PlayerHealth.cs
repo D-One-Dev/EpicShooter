@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Image[] healthUI;
     [SerializeField] private float damageRecoilTime;
     [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private AudioClip hitSound;
     private bool isProtected;
     private Coroutine hurtAnimation;
 
@@ -38,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
                 currentHealth += value;
                 _animator.SetTrigger("Hurt");
                 CameraShake.instance.ShakeCamera();
+                SoundController.instance.PlaySound(hitSound);
             }
             if(currentHealth <= 0)
             {
