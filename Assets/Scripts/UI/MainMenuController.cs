@@ -15,8 +15,10 @@ public class MainMenuController : MonoBehaviour
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
         soundVolume = PlayerPrefs.GetFloat("SoundVolume", 1f);
 
-        musicSlider.value = musicVolume;
-        soundSlider.value = soundVolume;
+        if(musicSlider != null)
+            musicSlider.value = musicVolume;
+        if(soundSlider != null)
+            soundSlider.value = soundVolume;
 
         musicMixer.audioMixer.SetFloat("MusicVolume", Mathf.Lerp(-80f, 0f, musicVolume));
         soundMixer.audioMixer.SetFloat("SoundVolume", Mathf.Lerp(-80f, 0f, soundVolume));

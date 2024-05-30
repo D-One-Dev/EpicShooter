@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static PlayerHealth Instance;
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private int currentHealth;
     [SerializeField] private Image[] healthUI;
@@ -14,6 +15,11 @@ public class PlayerHealth : MonoBehaviour
     private Coroutine hurtAnimation;
 
     [SerializeField] private Animator _animator;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         currentHealth = maxHealth;
