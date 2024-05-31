@@ -29,13 +29,13 @@ public class CloseRangeEnemy : MonoBehaviour, IDamageable
             if (player.position.x - .1f > transform.position.x)
             {
                 transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-                _rb.velocity = transform.right * moveSpeed;
+                _rb.velocity = new Vector2(transform.right.x * moveSpeed, _rb.velocity.y);// transform.right * moveSpeed;
                 _animator.SetTrigger("Run");
             }
             else if (player.position.x + .1f < transform.position.x)
             {
                 transform.localEulerAngles = new Vector3(0f, 180f, 0f);
-                _rb.velocity = transform.right * moveSpeed;
+                _rb.velocity = new Vector2(transform.right.x * moveSpeed, _rb.velocity.y);
                 _animator.SetTrigger("Run");
             }
             else
@@ -50,7 +50,6 @@ public class CloseRangeEnemy : MonoBehaviour, IDamageable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("!1111");
             _animator.SetTrigger("Attack");
         }
     }

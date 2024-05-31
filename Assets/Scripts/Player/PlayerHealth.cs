@@ -45,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 //Death
                 PlayerPrefs.SetInt("Score", ScoreController.instance.score);
+                PlayerPrefs.Save();
                 SceneManager.LoadScene("Death Scene");
             }
         }

@@ -31,6 +31,7 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
+        PlayerPrefs.SetInt("Score", 0);
         Time.timeScale = 1f;
         SceneManager.LoadScene("Gameplay");
     }

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private PlayerHealth _playerHealth;
@@ -12,6 +14,13 @@ public class PlayerCollision : MonoBehaviour
             _playerHealth.ChangeHealth(1);
             SoundController.instance.PlaySound(healSound);
             Destroy(collision.gameObject);
+        }
+
+        if(collision.gameObject.CompareTag("Level End"))
+        {
+            PlayerPrefs.SetInt("Score", ScoreController.instance.score);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("Win Scene");
         }
     }
 

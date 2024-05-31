@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Aid
   - Enemy
+  - Level End
   layers:
   - Default
   - TransparentFX
